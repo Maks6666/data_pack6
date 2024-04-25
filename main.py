@@ -1,16 +1,44 @@
-# This is a sample Python script.
+# Розроблення програми з таймером, що підраховує
+# час. Використати JSON для збереження стану таймера
+# (наприклад, поточний час) у файлі. При перезапуску
+# програми відновити час збереженого стану за
+# допомогою завантаження даних з JSON-файлу.
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+import time
+import json
+
+current_time = time.localtime()
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+class Time():
+    def __init__(self):
+        self.hours = current_time.tm_hour
+        self.minutes = current_time.tm_min
+
+    def get_time(self):
+        return f"{self.hours}:{self.minutes}"
+
+    def save(self, filename='timer.json'):
+        dct = {"hours": self.hours,
+               "minutes": self.minutes}
+        with open(filename, 'w') as file:
+            json.dump(dct, file)
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+timer = Time()
+print(timer.get_time())
+timer.save()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+
+
+
+
+
+
+
+
+
+
+
+
